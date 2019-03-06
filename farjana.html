@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<head>
+<script src="/assets/jquery.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Londrina+Shadow' rel='stylesheet' type='text/css'>
+<style>
+body {
+  font-family: helvetica, sans-serif;
+  margin: 0 auto;
+  max-width: 600px;
+  background: #232323;
+}
+div {
+  height: 300px;
+  background-size: cover;
+  position: relative;
+  margin: 40px 0 0 0;
+  border-radius: 12px;
+}
+h1 {
+  font-family: 'Londrina Shadow', cursive;
+  text-align: center;
+  font-size: 75px;
+  color: #aaaaaa;
+  margin: 60px 0 0 0;
+}
+h2 {
+  text-align: center;
+  color: #bbbbbb;
+  margin: 0px 0 70px 0;
+}
+ ul {
+    padding: 10px;
+    background: rgba(0,0,0,0.5);
+    text-align: center;
+    color: white;
+  }
+ li {
+    display: inline;
+    padding: 0px 10px 0px 10px;
+   }
+p {
+  color: rgba(255,255,255,1);
+  background: black;
+  background: linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+  background: -webkit-linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+  background: -moz-linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+  padding: 10px;
+  line-height: 28px;
+  text-align: justify;
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  height: 30px;
+  transition: height .5s;
+  -webkit-transition: height .5s;
+  -moz-transition: height .5s;
+}
+
+small {
+  opacity: 0;
+}
+
+.show-description p {
+  height: 150px;
+}
+
+.show-description small {
+  opacity: 1;
+}
+
+  float: right;
+}
+@media (max-width: 500px) {
+  h1 {
+    font-size: 50px;
+    margin-top: 20px;
+    line-height: 40px;
+  }
+  h2 {
+    font-size: 20px;
+    margin: 20px 0 30px 0;
+  }
+  div {
+    margin: 20px 12px 0 12px;
+  }
+  p {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  small {
+    font-size: 16px;
+  }
+}
+
+</style>
+
+</head>
+
+<body>
+ <ul>
+      <li><button onclick="dinner()">Dinner</button></li>
+      <li><button onclick="lunch()">Lunch</button></li>
+      <li><button onclick="dessert()">Dessert</button></li>
+    </ul>
+<h1>F.A.R.J.A.N.A restaurant</h1>
+<h2>a New York City eatery</h2>
+
+<div id="farjana"></div>
+
+<script>
+
+DinnerImages = [ 
+  'url("https://images-gmi-pmc.edge-generalmills.com/5efef778-f865-4ff6-bc3b-89ec7a62dc93.jpg")',
+  'url("https://www.tasteofhome.com/wp-content/uploads/2018/01/Spaghetti-and-Meatball-Skillet-Supper_EXPS_SDON17_191148_D06_30_4b-6-696x696.jpg")',
+  'url("https://irepo.primecp.com/2016/03/270810/recipe-27936_ArticleImage-CategoryPage_ID-1542794.jpg?v=1542794")',
+]
+
+LunchImages = [
+  'url("https://realfood.tesco.com/media/images/RFO-472x310-Baked-sweetcorn-fritters-with-Mexican-style-salad-8b316f2c-2032-4131-beca-a1ad91ed9c8a-0-472x310.jpg")',
+ 'url("https://www.tasteofhome.com/wp-content/uploads/2017/10/exps156279_THHC2377560B02_27_8b_WEB-696x696.jpg")',
+ 'url("http://www.naturesownbread.com/sites/default/files/styles/recipe_page/public/images/recipe/main/Tuna%20Artichoke%20Manchego%20Panini%20Flowers%204-18-16144917_460x310.jpg?itok=PvrTLLzq&timestamp=1462482947")',
+ ]
+ 
+DessertImages = [
+  'url("https://tipbuzz.com/wp-content/uploads/Mango-Panna-Cotta-1-3.jpg")',
+  'url("https://rewardsnetwork.wpengine.com/wp-content/uploads/2017/07/FunkyDessert3.jpg")',
+  'url("https://cdn-image.foodandwine.com/sites/default/files/HD-201104-r-chocolate-coupe.jpg")',
+]  
+DinnerDivs = [
+  '<div class="item"><p>Beef Taquito Casserole <span class="price">$22</span><br /> <small>Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil. </small></p</div>',
+'<div class="item"><p>Beef Taquito Casserole <span class="price">$22</span><br /><small>Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil. </small></p></div>',
+'<div class="item"><p>chicken Curry <span class="price">$10</span><br /><small>Lollipop tart cotton candy jelly-o carrot cake apple pie cupcake. Jelly-o bear claw ice cream candy canes.</small></p></div>',
+]
+
+LunchDivs=[
+  '<div class="item"><p>Mexican-style salad <span class="price">$15</span><br/><small>Packed with zingy spring onion, sweet red pepper and smoky paprika, these vegetarian sweetcorn fritters celebrate the fresh flavours of Mexican cuisine</small></p></div>',
+'<div class="item"><p>Chicken Caesar Pitas <span class="price">$15</span><br /><small>Combine chicken, bacon, lettuce, and croutons in a large bowl. Toss with Caesar salad dressing and Parmesan cheese. Season to taste with salt and pepper and toss again. Spoon salad mixture into pita bread halves </small></p></div>',
+'<div class="item"><p>Tuna,Artichoke and Manchego Panini <span class="price">$5.99</span><br/><small>train artichokes, reserving 1 tablespoon of the marinade. Combine artichokes, tuna, mayonnaise, olives and reserved 1 tablespoon marinade in a medium bowl. Top each of 4 bread slices with 1/4 cup cheese</small></p></div>',
+]
+
+DessertDivs=[
+  '<div class="item"><p>Creamy Mango Panna Cotta <span class="price">$5</span><br/><small>the mango puree, and the vanilla panna cotta itself. To make it, start by peeling your mangos. Then cut the flesh into chunks and add them to a blender or food processor. Pulse for 5-10 seconds and voila</small></p></div>',
+'<div class="item"><p>Halvah <span class="price">$5</span><br/><small>Halvah is a dense, sugary Middle Eastern confection traditionally made from sesame seeds and flavored with vanilla, pistachio, chocolate, or orange</small></p></div>',
+'<div class="item"><p>chocolate cake <span class="price">$5</span><br/><small>1 (15.25 ounce) box chocolate cake mix1 (3.9 ounce) box instant chocolate pudding1 (16 ounce) container sour cream3 eggs1/3 cupm vegetable oil1/2 cup water2 cups semi-sweet chocolate chips </small></p></div>',
+]
+
+function dinner() {
+coco= document.getElementById("farjana")
+coco.innerHTML = ''
+coco.innerHTML +=DinnerDivs[0]
+coco.innerHTML +=DinnerDivs[1]
+coco.innerHTML +=DinnerDivs[2]
+  //alert("easiest one-pot beef with broccoli")
+items = document.getElementsByClassName("item")  
+items[0].style.background=DinnerImages[0]
+items[0].style.backgroundSize = '100% 100%'
+items[1].style.background=DinnerImages[1]
+items[1].style.backgroundSize = '100% 100%'
+items[2].style.background=DinnerImages[2]
+}
+
+function lunch() {
+tata=document.getElementById("farjana")
+tata.innerHTML = ''
+tata.innerHTML+=LunchDivs[0]
+tata.innerHTML+=LunchDivs[1]
+tata.innerHTML+=LunchDivs[2]
+ //alert("Mexican-style salad <span class")
+items = document.getElementsByClassName("item")  
+items[0].style.background=LunchImages[0]
+items[0].style.backgroundSize = '100% 100%'
+items[1].style.background=LunchImages[1]
+items[1].style.backgroundSize = '100% 100%'
+items[2].style.background=LunchImages[2]
+}
+
+function dessert() {
+cream=document.getElementById("farjana")
+cream.innerHTML = ''
+cream.innerHTML+=DessertDivs[0]
+cream.innerHTML+=DessertDivs[1]
+cream.innerHTML+=DessertDivs[2]
+ //alert("creamy mangi panna cotta")
+items = document.getElementsByClassName("item")  
+items[0].style.background=DessertImages[0]
+items[0].style.backgroundSize = '100% 100%'
+items[1].style.background=DessertImages[1]
+items[1].style.backgroundSize = '100% 100%'
+items[2].style.background=DessertImages[2]
+} 
+  $('div').on('click', function() {
+      $(this).toggleClass('show-description');
+  });
+</script>
+
+</body>
